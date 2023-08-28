@@ -81,9 +81,12 @@ Ou, se você quiser que o trabalho seja executado em algum momento no futuro:
 ```ruby
 HardWorker.perform_in(5.minutes, 'Bob', 5)
 ```
-
-
-
+### 6. Rodar o Sidekiq:
+ 
+Abra um terminal e execute:
+```console
+bundle exec sidekiq
+```
 
 
 
