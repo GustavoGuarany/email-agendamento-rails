@@ -81,7 +81,38 @@ Ou, se você quiser que o trabalho seja executado em algum momento no futuro:
 ```ruby
 HardWorker.perform_in(5.minutes, 'Bob', 5)
 ```
-### 6. Rodar o Sidekiq:
+
+### 6. Configurar Rufus-Scheduler
+Crie um arquivo em `config/initializers/scheduler.rb`:
+
+```ruby
+require 'rufus-scheduler'
+
+s = Rufus::Scheduler.singleton
+
+s.every '1m' do
+  # Aqui você pode buscar tarefas e agendar e-mails
+  # Por exemplo:
+  # tasks = Task.where("created_at <= ?", Time.now - 5.minutes)
+  # tasks.each do |task|
+  #   TaskWorker.perform_async(task.email, task)
+  # end
+end
+```
+### 7. Configurar Redis
+Certifique-se de que você tenha o Redis instalado e rodando. Se você não tiver, pode instalá-lo com:
+
+```console
+sudo apt update
+sudo apt install redis-server
+```
+Inicie o servidor Redis:
+
+```console
+redis-server
+```
+
+### 8. Rodar o Sidekiq:
  
 Abra um terminal e execute:
 ```console
